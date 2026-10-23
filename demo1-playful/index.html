@@ -37,7 +37,23 @@ img{display:block;max-width:100%}a{color:inherit}.wrap{max-width:1200px;margin:0
 .foot-base{display:flex;justify-content:space-between;padding-top:20px;padding-bottom:28px;font-size:13px;opacity:.6;border-top:1px solid rgba(255,255,255,.15)}
 @media(max-width:960px){.links,.nav-cta{display:none}.menu{display:block}.nav-open .links{display:flex;flex-direction:column;position:absolute;top:76px;left:0;right:0;padding:24px 32px;gap:18px;background:var(--bg);border-bottom:1px solid var(--line)}
 .row{grid-template-columns:1fr auto;gap:8px 16px}.r-t{grid-column:1/-1}.r-s{grid-column:1}.r-b{grid-row:2/4;grid-column:2;padding:10px 16px}.foot-in{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.wrap{padding:0 20px}.foot-in{grid-template-columns:1fr}}:root{--navy:#245B8A;--yellow:#F8EE4E;--ink:#14324d;--bg:#fffdf6;--line:#e6e0cc;--line2:#cfc8b0;--coral:#E8684A}
+@media(max-width:600px){.wrap{padding:0 20px}.foot-in{grid-template-columns:1fr}}
+/* ---- responsive safeguards ---- */
+img,video,svg,iframe{max-width:100%;height:auto}
+.wrap>*,[class*="-in"]>*,[class*="-g"]>*,.signup>*,.two>*,.vm>*,.sch-f>*,.feats>*,.more>*,.adult>*,.bento>*,.row>*,.form>*,.form label{min-width:0}
+.form input,.form select,.form textarea{width:100%;max-width:100%;min-width:0;font-size:16px;min-height:48px}
+select{text-overflow:ellipsis}dd,.det,.foot p{overflow-wrap:anywhere}.contact dl{grid-template-columns:auto minmax(0,1fr)!important}
+h1,h2,h3{overflow-wrap:break-word;hyphens:manual}
+.btn,.pill,.r-b,.filters button,.nav-cta{min-height:44px}.menu{width:44px;height:44px;display:none;align-items:center;justify-content:center;flex-direction:column}.menu i{width:24px;margin:3px 0}
+.links a{padding:6px 0}
+@media(max-width:960px){.menu{display:flex}.nav-open .links a{padding:10px 0;font-size:17px}
+ [class*="-in"],[class*="-g"],.signup,.two,.vm,.sch-f,.adult,.more,.feats{grid-template-columns:minmax(0,1fr)!important}
+ .row{grid-template-columns:minmax(0,1fr) auto!important}.hero-bot{grid-template-columns:minmax(0,1fr)!important;gap:24px!important}.r-b{min-width:96px}}
+@media(max-width:600px){h1{font-size:clamp(40px,11.5vw,64px)!important}h2{font-size:clamp(32px,8.6vw,44px)!important}
+ .row{grid-template-columns:minmax(0,1fr)!important;gap:6px!important;padding:18px 0}.r-t,.r-c,.r-s,.r-b{grid-column:1!important;grid-row:auto!important}.r-s{max-width:260px}.r-b{width:100%;margin-top:8px}
+ .filters{flex-wrap:wrap}.filters button{flex:1 1 auto}}
+html,body{overflow-x:clip} /* last-resort safety net only */
+:root{--navy:#245B8A;--yellow:#F8EE4E;--ink:#14324d;--bg:#fffdf6;--line:#e6e0cc;--line2:#cfc8b0;--coral:#E8684A}
 body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.6}
 h1,h2,h3,.brand span{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.025em;line-height:1}
 .nav{background:var(--bg);border-bottom:1px solid var(--line)}.nav-cta{background:var(--navy);color:#fff}.nav-cta:hover{background:var(--ink)}
@@ -123,5 +139,5 @@ function ok(f,m,t){document.getElementById(f).addEventListener('submit',e=>{e.pr
 ok('form','msg',()=>{const s=S.find(x=>x.id==sel.value);s.l--;const n=document.getElementById('nm').value;render();return `Thank you, ${n}. Your seat in ${s.c} on ${s.d} ${s.dt} is reserved. (Demo only — nothing was sent.)`});
 ok('dform','dmsg',()=>'Thank you. We received your scholarship application and will be in touch. (Demo only — nothing was sent.)');
 ok('cform','cmsg',()=>'Thanks for reaching out. We will reply soon. (Demo only.)');
-const m=document.querySelector('.menu');if(m)m.onclick=()=>document.body.classList.toggle('nav-open');
+const m=document.querySelector('.menu');if(m){m.setAttribute('aria-expanded','false');m.onclick=()=>m.setAttribute('aria-expanded',document.body.classList.toggle('nav-open'))}document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('nav-open')));
 </script></body></html>
